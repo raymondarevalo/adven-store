@@ -12,10 +12,10 @@ export function Heading({
   ...props
 }) {
   const sizes = {
-    display: 'font-bold text-display',
-    heading: 'font-bold text-heading',
-    lead: 'font-bold text-lead',
-    copy: 'font-medium text-copy',
+    display: 'h1',
+    heading: 'h3',
+    lead: 'h4',
+    copy: 'p',
   };
 
   const widths = {

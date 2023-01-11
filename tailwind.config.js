@@ -47,8 +47,15 @@ module.exports = {
         mobileGallery: 'calc(100vw - 3rem)',
       },
       fontFamily: {
-        sans: ['Helvetica Neue', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['"IBMPlexSerif"', 'Palatino', 'ui-serif'],
+        sans: [
+          'neue-haas-unica',
+          'Helvetica Neue',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+        serif: ['new-spirit', '"IBMPlexSerif"', 'Palatino', 'ui-serif'],
+        display: ['new-spirit'],
       },
       fontSize: {
         display: ['var(--font-size-display)', '1.1'],
@@ -66,8 +73,10 @@ module.exports = {
         darkHeader: 'inset 0px -1px 0px 0px rgba(21, 21, 21, 0.4)',
         lightHeader: 'inset 0px -1px 0px 0px rgba(21, 21, 21, 0.05)',
       },
+      gap: {
+        3: '0.75rem',
+      },
     },
   },
-  // eslint-disable-next-line node/no-unpublished-require
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

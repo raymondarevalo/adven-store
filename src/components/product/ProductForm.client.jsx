@@ -1,4 +1,4 @@
-import {useEffect, useCallback, useState} from 'react';
+import {useEffect, useCallback, useState, useRef} from 'react';
 
 import {
   useProductOptions,
@@ -10,6 +10,7 @@ import {
 } from '@shopify/hydrogen';
 
 import {Heading, Text, Button, ProductOptions} from '~/components';
+//import {useDrawer} from '../global/Drawer.client';
 
 export function ProductForm() {
   const {pathname, search} = useUrl();
@@ -19,9 +20,8 @@ export function ProductForm() {
     useProductOptions();
 
   const isOutOfStock = !selectedVariant?.availableForSale || false;
-  const isOnSale =
-    selectedVariant?.priceV2?.amount <
-      selectedVariant?.compareAtPriceV2?.amount || false;
+
+  //const {openDrawer: openCart} = useDrawer();
 
   useEffect(() => {
     if (params || !search) return;
@@ -124,14 +124,14 @@ export function ProductForm() {
                   data={selectedVariant.priceV2}
                   as="span"
                 />
-                {isOnSale && (
+                {/*isOnSale && (
                   <Money
                     withoutTrailingZeros
                     data={selectedVariant.compareAtPriceV2}
                     as="span"
                     className="opacity-50 strike"
                   />
-                )}
+                )*/}
               </Text>
             )}
           </Button>

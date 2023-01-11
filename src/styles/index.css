@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/gqo2hms.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,7 +23,7 @@
     --height-nav: 4rem;
   }
   @media (min-width: 48em) {
-    --height-nav: 6rem;
+    --height-nav: 4.375rem;
     --font-size-heading: 2.25rem; /* text-4xl */
     --font-size-display: 3.75rem; /* text-6xl */
   }
@@ -34,7 +35,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --color-primary: 250 250 250;
     --color-contrast: 32 33 36;
@@ -55,6 +56,7 @@ shop-pay-button {
   width: 100%;
   height: 3rem;
   display: table;
+  background-color: #5a31f4 !important;
 }
 
 @layer base {
@@ -83,6 +85,91 @@ shop-pay-button {
   input[type='search']::-webkit-search-results-button,
   input[type='search']::-webkit-search-results-decoration {
     -webkit-appearance: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+
+  h1,
+  .h1 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  @media screen and (min-width: 768px) {
+    h1,
+    .h1 {
+      font-size: 60px;
+      line-height: 72px;
+    }
+
+    h2,
+    .h2 {
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    h3,
+    .h3 {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    h4,
+    .h4 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    h5,
+    .h5,
+    h6,
+    .h6 {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  a,
+  p,
+  .p,
+  ul,
+  li {
+    @apply font-sans;
+    font-size: 16px;
+    line-height: 24px;
   }
 
   .prose {
@@ -166,10 +253,10 @@ shop-pay-button {
   }
 
   .card-image {
-    @apply relative rounded overflow-clip flex justify-center items-center;
+    @apply relative overflow-clip flex justify-center items-center;
     &::before {
       content: ' ';
-      @apply z-10 absolute block top-0 left-0 w-full h-full shadow-border rounded;
+      @apply z-10 absolute block top-0 left-0 w-full h-full shadow-border;
     }
     img {
       @apply object-cover w-full aspect-[inherit];

@@ -1,4 +1,5 @@
 import {Suspense} from 'react';
+import clsx from 'clsx';
 import {
   gql,
   ProductOptionsProvider,
@@ -8,10 +9,12 @@ import {
   useRouteParams,
   useServerAnalytics,
   useShopQuery,
+  Money,
+  useMoney,
 } from '@shopify/hydrogen';
 
 import {MEDIA_FRAGMENT} from '~/lib/fragments';
-import {getExcerpt} from '~/lib/utils';
+import {getExcerpt, isDiscounted} from '~/lib/utils';
 import {NotFound, Layout, ProductSwimlane} from '~/components/index.server';
 import {
   Heading,
@@ -49,6 +52,7 @@ export default function Product() {
   const {shippingPolicy, refundPolicy} = shop;
   const {
     priceV2,
+    compareAtPriceV2,
     id: variantId,
     sku,
     title: variantTitle,
@@ -80,29 +84,39 @@ export default function Product() {
         <Seo type="product" data={product} />
       </Suspense>
       <ProductOptionsProvider data={product}>
-        <Section padding="x" className="px-0">
-          <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
+        <Section padding="pdp" className="px-0">
+          <div className="grid items-start md:gap-6 lg:gap-16 md:grid-cols-2 lg:grid-cols-4">
             <ProductGallery
               media={media.nodes}
-              className="w-screen md:w-full lg:col-span-2"
+              className="w-full md:w-full md:col-span-2"
             />
-            <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
-              <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
+            <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll md:col-span-2">
+              <section className="flex flex-col w-full gap-8 py-6 md:max-w-xl md:px-0">
                 <div className="grid gap-2">
-                  <Heading as="h1" format className="whitespace-normal">
+                  <Heading
+                    as="h1"
+                    format
+                    className="whitespace-normal"
+                    size="display"
+                  >
                     {title}
                   </Heading>
-                  {vendor && (
-                    <Text className={'opacity-50 font-medium'}>{vendor}</Text>
-                  )}
+                  <div className="grid grid-flow-col justify-start gap-3">
+                    <p className="h5">
+                      <Money withoutTrailingZeros data={priceV2} />
+                    </p>
+                    {isDiscounted(priceV2, compareAtPriceV2) && (
+                      <CompareAtPrice
+                        className={'opacity-50'}
+                        data={compareAtPriceV2}
+                      />
+                    )}
+                  </div>
                 </div>
                 <ProductForm />
                 <div className="grid gap-4 py-4">
                   {descriptionHtml && (
-                    <ProductDetail
-                      title="Product Details"
-                      content={descriptionHtml}
-                    />
+                    <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
                   )}
                   {shippingPolicy?.body && (
                     <ProductDetail
@@ -197,3 +211,17 @@ const PRODUCT_QUERY = gql`
     }
   }
 `;
+
+function CompareAtPrice({data, className}) {
+  const {currencyNarrowSymbol, withoutTrailingZerosAndCurrency} =
+    useMoney(data);
+
+  const styles = clsx('strike h5', className);
+
+  return (
+    <p className={styles}>
+      {currencyNarrowSymbol}
+      {withoutTrailingZerosAndCurrency}
+    </p>
+  );
+}

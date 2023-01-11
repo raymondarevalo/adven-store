@@ -25,12 +25,12 @@ export function CartDetails({layout, onClose}) {
   };
 
   const content = {
-    drawer: 'px-6 pb-6 sm-max:pt-2 overflow-auto transition md:px-12',
+    drawer: 'px-5 py-6 sm-max:pt-2 overflow-auto transition md:px-6',
     page: 'flex-grow md:translate-y-4',
   };
 
   const summary = {
-    drawer: 'grid gap-6 p-6 border-t md:px-12',
+    drawer: 'grid gap-6 p-6 border-t md:px-6',
     page: 'sticky top-nav grid gap-6 p-4 md:px-6 md:translate-y-4 bg-primary/5 rounded w-full',
   };
 

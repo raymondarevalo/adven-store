@@ -9,7 +9,7 @@ export function CartEmpty({onClose, layout = 'drawer'}) {
   const {y} = useScroll(scrollRef);
 
   const container = {
-    drawer: `grid content-start gap-4 px-6 pb-8 transition overflow-y-scroll md:gap-12 md:px-12 h-screen-no-nav md:pb-12 ${
+    drawer: `grid content-start gap-4 px-5 pb-8 transition overflow-y-scroll md:gap-12 md:px-6 h-screen-no-nav md:pb-12 ${
       y > 0 ? 'border-t' : ''
     }`,
     page: `grid pb-12 w-full md:items-start gap-4 md:gap-8 lg:gap-12`,
@@ -31,7 +31,7 @@ export function CartEmpty({onClose, layout = 'drawer'}) {
           <Button onClick={onClose}>Continue shopping</Button>
         </div>
       </section>
-      <section className="grid gap-8 pt-4">
+      <section className="grid gap-4 pt-4">
         <Heading format size="copy">
           Shop Best Sellers
         </Heading>

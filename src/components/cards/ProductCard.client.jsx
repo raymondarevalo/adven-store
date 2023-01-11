@@ -30,12 +30,12 @@ export function ProductCard({product, label, className, loading, onClick}) {
     cardLabel = 'New';
   }
 
-  const styles = clsx('grid gap-6', className);
+  const styles = clsx('grid gap-4', className);
 
   return (
     <Link onClick={onClick} to={`/products/${product.handle}`}>
       <div className={styles}>
-        <div className="card-image aspect-[4/5] bg-primary/5">
+        <div className="card-image aspect-[3/4] bg-primary/5">
           <Text
             as="label"
             size="fine"
@@ -45,14 +45,14 @@ export function ProductCard({product, label, className, loading, onClick}) {
           </Text>
           {image && (
             <Image
-              className="aspect-[4/5] w-full object-cover fadeIn"
-              widths={[320]}
+              className="aspect-[3/4] w-full object-cover fadeIn"
+              widths={[345]}
               sizes="320px"
               loaderOptions={{
                 crop: 'center',
                 scale: 2,
-                width: 320,
-                height: 400,
+                width: 345,
+                height: 460,
               }}
               // @ts-ignore Stock type has `src` as optional
               data={image}

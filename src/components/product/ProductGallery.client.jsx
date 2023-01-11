@@ -11,7 +11,7 @@ export function ProductGallery({media, className}) {
 
   return (
     <div
-      className={`swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 ${className}`}
+      className={`md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 ${className}`}
     >
       {media.map((med, i) => {
         let mediaProps = {};
@@ -66,7 +66,7 @@ export function ProductGallery({media, className}) {
         const style = [
           isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
           isFirst || isFourth ? '' : 'md:aspect-[4/5]',
-          'aspect-square snap-center card-image bg-white dark:bg-contrast/10 w-mobileGallery md:w-full',
+          'aspect-[3/4] snap-center card-image bg-white dark:bg-contrast/10  md:w-full',
         ].join(' ');
 
         return (
@@ -77,7 +77,7 @@ export function ProductGallery({media, className}) {
           >
             <MediaFile
               tabIndex="0"
-              className={`w-full h-full aspect-square fadeIn object-cover`}
+              className={`w-full h-full aspect-[3/4] fadeIn object-cover`}
               data={data}
               sizes={
                 isFullWidth

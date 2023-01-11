@@ -10,7 +10,7 @@ export function FeaturedCollections({data, title = 'Collections', ...props}) {
 
   return (
     <Section {...props} heading={title}>
-      <Grid items={items}>
+      <Grid items={items} gap="collections">
         {data.map((collection) => {
           if (!collection?.image) {
             return null;
@@ -19,14 +19,14 @@ export function FeaturedCollections({data, title = 'Collections', ...props}) {
           return (
             <Link key={collection.id} to={`/collections/${collection.handle}`}>
               <div className="grid gap-4">
-                <div className="card-image bg-primary/5 aspect-[3/2]">
+                <div className="card-image bg-primary/5 aspect-[3/4]">
                   {collection?.image && (
                     <Image
                       alt={`Image of ${collection.title}`}
                       data={collection.image}
-                      height={400}
+                      height={533}
                       sizes="(max-width: 32em) 100vw, 33vw"
-                      width={600}
+                      width={400}
                       widths={[400, 500, 600, 700, 800, 900]}
                       loaderOptions={{
                         scale: 2,
@@ -35,7 +35,7 @@ export function FeaturedCollections({data, title = 'Collections', ...props}) {
                     />
                   )}
                 </div>
-                <Heading size="copy">{collection.title}</Heading>
+                <Heading size="lead">{collection.title}</Heading>
               </div>
             </Link>
           );

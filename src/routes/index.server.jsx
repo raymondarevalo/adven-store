@@ -49,7 +49,7 @@ function HomepageContent() {
     preload: true,
   });
 
-  const {heroBanners, featuredCollections, featuredProducts} = data;
+  const {heroBanners, featuredCollections} = data;
 
   // fill in the hero banners with placeholders if they're missing
   const [primaryHero, secondaryHero, tertiaryHero] = getHeroPlaceholder(
@@ -59,19 +59,20 @@ function HomepageContent() {
   return (
     <>
       {primaryHero && (
-        <Hero {...primaryHero} height="full" top loading="eager" />
+        <Hero {...primaryHero} height="fullasdf" loading="eager" />
       )}
+      {/*
       <ProductSwimlane
         data={featuredProducts.nodes}
         title="Featured Products"
         divider="bottom"
       />
-      {secondaryHero && <Hero {...secondaryHero} />}
+      */}
+
       <FeaturedCollections
         data={featuredCollections.nodes}
-        title="Collections"
+        title="New Arrivals"
       />
-      {tertiaryHero && <Hero {...tertiaryHero} />}
     </>
   );
 }
@@ -150,9 +151,10 @@ const HOMEPAGE_CONTENT_QUERY = gql`
       }
     }
     featuredCollections: collections(
-      first: 3
+      first: 4
       query: "collection_type:smart"
       sortKey: UPDATED_AT
+      reverse: true
     ) {
       nodes {
         id

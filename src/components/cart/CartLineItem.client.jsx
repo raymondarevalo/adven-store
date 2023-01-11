@@ -26,7 +26,7 @@ export function CartLineItem() {
             scale: 2,
             crop: 'center',
           }}
-          className="object-cover object-center w-24 h-24 border rounded md:w-28 md:h-28"
+          className="object-cover object-center w-24 h-24 border md:w-28 md:h-28"
         />
       </div>
 
@@ -53,7 +53,7 @@ export function CartLineItem() {
             <button
               type="button"
               onClick={() => linesRemove([lineId])}
-              className="flex items-center justify-center w-10 h-10 border rounded"
+              className="flex items-center justify-center w-10 h-10 border"
             >
               <span className="sr-only">Remove</span>
               <IconRemove aria-hidden="true" />
@@ -74,7 +74,7 @@ function CartLineQuantityAdjust({lineId, quantity}) {
       <label htmlFor={`quantity-${lineId}`} className="sr-only">
         Quantity, {quantity}
       </label>
-      <div className="flex items-center border rounded">
+      <div className="flex items-center border">
         <CartLineQuantityAdjustButton
           adjust="decrease"
           aria-label="Decrease quantity"

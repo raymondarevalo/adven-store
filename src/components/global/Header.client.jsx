@@ -1,14 +1,7 @@
 import {Link, useUrl, useCart} from '@shopify/hydrogen';
 import {useWindowScroll} from 'react-use';
 
-import {
-  Heading,
-  IconAccount,
-  IconBag,
-  IconMenu,
-  IconSearch,
-  Input,
-} from '~/components';
+import {Heading, IconBag, IconMenu} from '~/components';
 
 import {CartDrawer} from './CartDrawer.client';
 import {MenuDrawer} from './MenuDrawer.client';
@@ -42,7 +35,6 @@ export function Header({title, menu}) {
       <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
       <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu} />
       <DesktopHeader
-        countryCode={countryCode}
         isHome={isHome}
         title={title}
         menu={menu}
@@ -59,26 +51,28 @@ export function Header({title, menu}) {
   );
 }
 
-function MobileHeader({countryCode, title, isHome, openCart, openMenu}) {
+function MobileHeader({title, isHome, openCart, openMenu}) {
   const {y} = useWindowScroll();
 
   const styles = {
     button: 'relative flex items-center justify-center w-8 h-8',
     container: `${
       isHome
-        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-        : 'bg-contrast/80 text-primary'
+        ? 'bg-contrast/80 text-primary border-b'
+        : 'bg-contrast/80 text-primary border-b'
     } ${
       y > 50 && !isHome ? 'shadow-lightHeader ' : ''
-    }flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`,
+    }flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-16`,
   };
 
   return (
     <header role="banner" className={styles.container}>
+      {/* Left side */}
       <div className="flex items-center justify-start w-full gap-4">
         <button onClick={openMenu} className={styles.button}>
           <IconMenu />
         </button>
+        {/*}
         <form
           action={`/${countryCode ? countryCode + '/' : ''}search`}
           className="items-center gap-2 sm:flex"
@@ -98,21 +92,26 @@ function MobileHeader({countryCode, title, isHome, openCart, openMenu}) {
             name="q"
           />
         </form>
+          {*/}
       </div>
 
+      {/* Middle */}
       <Link
-        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
+        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full font-bold"
         to="/"
       >
-        <Heading className="font-bold text-center" as={isHome ? 'h1' : 'h2'}>
+        <Heading className="" size="lead">
           {title}
         </Heading>
       </Link>
 
+      {/* Right side */}
       <div className="flex items-center justify-end w-full gap-4">
+        {/*}
         <Link to={'/account'} className={styles.button}>
           <IconAccount />
         </Link>
+        {*/}
         <button onClick={openCart} className={styles.button}>
           <IconBag />
           <CartBadge dark={isHome} />
@@ -122,7 +121,7 @@ function MobileHeader({countryCode, title, isHome, openCart, openMenu}) {
   );
 }
 
-function DesktopHeader({countryCode, isHome, menu, openCart, title}) {
+function DesktopHeader({isHome, menu, openCart, title}) {
   const {y} = useWindowScroll();
 
   const styles = {
@@ -130,29 +129,38 @@ function DesktopHeader({countryCode, isHome, menu, openCart, title}) {
       'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
     container: `${
       isHome
-        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-        : 'bg-contrast/80 text-primary'
+        ? 'bg-contrast/80 text-primary border-b'
+        : 'bg-contrast/80 text-primary border-b'
     } ${
       y > 50 && !isHome ? 'shadow-lightHeader ' : ''
-    }hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`,
+    }hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-16 py-8`,
   };
 
   return (
     <header role="banner" className={styles.container}>
-      <div className="flex gap-12">
-        <Link className={`font-bold`} to="/">
+      {/* Left side */}
+      <nav className="flex items-center gap-8 justify-start w-full">
+        {/* Top level menu items */}
+        {(menu?.items || []).map((item) => (
+          <Link key={item.id} to={item.to} target={item.target}>
+            {item.title}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Middle */}
+      <Link
+        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full font-bold"
+        to="/"
+      >
+        <Heading className="" size="lead">
           {title}
-        </Link>
-        <nav className="flex gap-8">
-          {/* Top level menu items */}
-          {(menu?.items || []).map((item) => (
-            <Link key={item.id} to={item.to} target={item.target}>
-              {item.title}
-            </Link>
-          ))}
-        </nav>
-      </div>
-      <div className="flex items-center gap-1">
+        </Heading>
+      </Link>
+
+      {/* Right side */}
+      <div className="flex items-center gap-1 justify-end w-full">
+        {/*}
         <form
           action={`/${countryCode ? countryCode + '/' : ''}search`}
           className="flex items-center gap-2"
@@ -172,9 +180,7 @@ function DesktopHeader({countryCode, isHome, menu, openCart, title}) {
             <IconSearch />
           </button>
         </form>
-        <Link to={'/account'} className={styles.button}>
-          <IconAccount />
-        </Link>
+          {*/}
         <button onClick={openCart} className={styles.button}>
           <IconBag />
           <CartBadge dark={isHome} />

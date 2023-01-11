@@ -3,39 +3,26 @@ const PLACEHOLDERS = {
   HEROS: [
     // primaryHero
     {
-      heading: {value: 'All Mountain All Season'},
+      heading: {
+        value: 'Unbranded essentials garments with no logos, nor markups.',
+      },
       byline: {
         value: 'The All New Hydrogen Snowboard Exclusively From Shopify',
       },
       cta: {value: 'Shop Now →'},
-      handle: 'freestyle',
+      handle: 'shop-all',
       spread: {
         reference: {
           mediaContentType: 'IMAGE',
           alt: 'Tracks in the snow leading to a person on a mountain top with a red jacket contrasting to an epic blue horizon with a mountain range in the distance.',
           previewImage: {
-            url: 'https://cdn.shopify.com/s/files/1/0551/4566/0472/files/Hydrogen_Hero_Feature_1.jpg?v=1654902468',
+            url: 'https://cdn.shopify.com/s/files/1/0702/3673/3759/files/hero.jpg?v=1673465996',
           },
           id: 'gid://shopify/MediaImage/29259478466616',
           image: {
-            url: 'https://cdn.shopify.com/s/files/1/0551/4566/0472/files/Hydrogen_Hero_Feature_1.jpg?v=1654902468',
-            width: 2500,
-            height: 3155,
-          },
-        },
-      },
-      spreadSecondary: {
-        reference: {
-          mediaContentType: 'IMAGE',
-          alt: 'A snowboarder standing on a mountain top in choppy snow, shows off the back of his snowboard which reads Hydrogen in a cursive script.',
-          previewImage: {
-            url: 'https://cdn.shopify.com/s/files/1/0551/4566/0472/files/Hydrogen_Hero_Feature_2.jpg?v=1654902468',
-          },
-          id: 'gid://shopify/MediaImage/29259478499384',
-          image: {
-            url: 'https://cdn.shopify.com/s/files/1/0551/4566/0472/files/Hydrogen_Hero_Feature_2.jpg?v=1654902468',
-            width: 2500,
-            height: 3155,
+            url: 'https://cdn.shopify.com/s/files/1/0702/3673/3759/files/hero.jpg?v=1673465996',
+            width: 2343,
+            height: 3125,
           },
         },
       },
@@ -201,6 +188,7 @@ export function getHeroPlaceholder(heros) {
 
     // prioritize metafield data if available, else the hero hero values
     // otherwise the placeholder values
+    /*
     const byLine =
       hero?.byLine || hero?.descriptionHtml
         ? {value: hero.descriptionHtml}
@@ -208,13 +196,14 @@ export function getHeroPlaceholder(heros) {
 
     const heading =
       hero?.heading || hero?.title ? {value: hero.title} : placeholder.heading;
+      */
 
     // merge hero placeholder with hero data
     return {
-      heading,
-      byLine,
+      heading: placeholder.heading,
+      byLine: placeholder.byline,
       cta: hero?.cta || placeholder.cta,
-      handle: hero?.handle || placeholder.handle,
+      handle: placeholder.handle,
       id: hero?.id || index,
       spread: hero?.spread || placeholder.spread,
       spreadSecondary: hero?.spreadSecondary || placeholder.spreadSecondary,

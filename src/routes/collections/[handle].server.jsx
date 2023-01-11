@@ -63,7 +63,7 @@ export default function Collection({params}) {
           </div>
         )}
       </PageHeader>
-      <Section>
+      <Section padding="cdp">
         <ProductGrid
           key={collection.id}
           collection={collection}
